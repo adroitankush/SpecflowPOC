@@ -1,0 +1,630 @@
+
+<!DOCTYPE html>
+<html>
+
+    <head>
+    <meta charset='UTF-8' />
+    <meta name='description' content='' />
+    <meta name='robots' content='noodp, noydir' />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href='https://cdn.rawgit.com/anshooarora/extentreports-csharp/3b6cc04fd241b9782606e57fc5e84f0e42172c08/dist/css/extent.css' type='text/css' rel='stylesheet' />
+
+    <title>ExtentReport</title>
+
+</head>
+    
+
+
+	<body class='extent standard default hide-overflow '>
+		<div id='theme-selector' alt='Click to toggle theme. To enable by default, use theme configuration.' title='Click to toggle theme. To enable by default, use theme configuration.'>
+			<span><i class='material-icons'>desktop_windows</i></span>
+		</div>
+
+		<nav>
+    <div class="nav-wrapper">
+        <a href="http://extentreports.relevantcodes.com" class="brand-logo blue darken-3">Extent</a>
+
+        <!-- slideout menu -->
+        <ul id='slide-out' class='side-nav fixed hide-on-med-and-down'>
+            <li class='waves-effect active'><a href='#!' view='test-view' onclick="configureView(0);chartsView('test');"><i class='material-icons'>dashboard</i></a></li>
+                        <li class='waves-effect'><a href='#!' onclick="configureView(-1);chartsView('dashboard');" view='dashboard-view'><i class='material-icons'>track_changes</i></i></a></li>
+        </ul>
+
+        <!-- report name -->
+        <span class='report-name'>Automation Report</span>
+
+        <!-- report headline -->
+        <span class='report-headline'></span>
+
+        <!-- nav-right -->
+        <ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
+
+            <a>
+                <span class='suite-start-time label blue darken-3'>7/8/2018 3:27:28 PM India Standard Time</span>
+            </a>
+            <a>
+                <span class="label blue darken-3">3.1.0</span>
+            </a>
+        </ul>
+    </div>
+</nav>
+
+		<!-- container -->
+		<div class='container'>
+
+            
+<div id='test-view' class='view'>
+
+    <section id='controls'>
+        <div class='controls grey lighten-4'>
+            <!-- test toggle -->
+            <div class='chip transparent'>
+                <a class='dropdown-button tests-toggle' data-activates='tests-toggle' data-constrainwidth='true' data-beloworigin='true' data-hover='true' href='#'>
+                    <i class='material-icons'>warning</i> Status
+                </a>
+                <ul id='tests-toggle' class='dropdown-content'>
+                    <li status='pass'><a href='#!'>Pass <i class='material-icons green-text'>check_circle</i></a></li>
+                    <li status='fail'><a href='#!'>Fail <i class='material-icons red-text'>cancel</i></a></li>
+                    <li status='error'><a href='#!'>Error <i class='material-icons red-text lighten-2'>error</i></a></li>
+                    <li status='warning'><a href='#!'>Warning <i class='material-icons orange-text'>warning</i></a></li>
+                    <li status='skip'><a href='#!'>Skip <i class='material-icons cyan-text'>redo</i></a></li>
+                    <li class='divider'></li>
+                    <li status='clear' clear='true'><a href='#!'>Clear Filters <i class='material-icons'>clear</i></a></li>
+                </ul>
+            </div>
+            <!-- test toggle -->
+
+            <!-- category toggle -->
+            <!-- category toggle -->
+
+            <!-- clear filters -->
+            <div class='chip transparent hide'>
+                <a class='' id='clear-filters' alt='Clear Filters' title='Clear Filters'>
+                    <i class='material-icons'>close</i> Clear
+                </a>
+            </div>
+            <!-- clear filters -->
+
+            <!-- enable dashboard -->
+
+            <div id='toggle-test-view-charts' class='chip transparent'>
+                    <a class='pink-text' id='enable-dashboard' alt='Enable Dashboard' title='Enable Dashboard'>
+                        <i class='material-icons'>track_changes</i> Dashboard
+                    </a>
+            </div>
+            <!-- enable dashboard -->
+
+            <!-- search -->
+            <div class='chip transparent' alt='Search Tests' title='Search Tests'>
+                <a href="#" class='search-div'>
+                    <i class='material-icons'>search</i> Search
+                </a>
+
+                <div class='input-field left hide'>
+                    <input id='search-tests' type='text' class='validate browser-default' placeholder='Search Tests...'>
+                </div>
+
+            </div>
+            <!-- search -->
+        </div>
+    </section>
+
+
+
+<div id='test-view-charts' class='subview-full'>
+    <div id='charts-row' class='row nm-v nm-h'>
+        <div class='col s12 m6 l6 np-h'>
+            <div class='card-panel nm-v'>
+                <div class='left panel-name'>Tests</div>
+                <div class='chart-box'>
+                    <canvas id='parent-analysis' width='100' height='80'></canvas>
+                </div>
+                <div class='block text-small'>
+                    <span><span class='strong'>1</span> test(s) passed</span>
+                </div>
+                <div class='block text-small'>
+                    <span class='strong'>3</span> test(s) failed, <span class='strong'>0</span> others
+                </div>
+            </div>
+        </div>
+
+            <div class='col s12 m6 l6 np-h'>
+                <div class='card-panel nm-v'>
+                    <div class='left panel-name'>Steps</div>
+                    <div class='chart-box'>
+                        <canvas id='child-analysis' width='100' height='80'></canvas>
+                    </div>
+                    <div class='block text-small'>
+                        <span><span class='strong'>20</span> step(s) passed</span>
+                    </div>
+                    <div class='block text-small'>
+                        <span class='strong'>4</span> step(s) failed, <span class='strong'>0</span> others
+                    </div>
+                </div>
+            </div>
+
+    </div>
+</div>
+    <div class='subview-left left'>
+
+        <div class='view-summary'>
+            <h5>Tests</h5>
+
+            <ul id='test-collection' class='test-collection'>
+
+
+                    <li class='test displayed active  fail' status='fail' test-id='1'>
+                        <div class='test-heading'>
+                            <span class='test-name'>Scenario: Verify No of links appearing on Google page with right search</span>
+                            <span class='test-time'>7/8/2018 3:27:28 PM</span>
+                            <span class='test-status right fail'>Fail</span>
+                        </div>
+                        <div class='test-content hide'>
+                                <div class='test-time-info'>
+                                    <span class='label start-time'>7/8/2018 3:27:28 PM</span>
+                                    <span class='label end-time'>7/8/2018 3:28:17 PM</span>
+                                    <span class='label time-taken grey lighten-1 white-text'>00:00:49.2631008</span>
+                                </div>
+                                    <div class='test-attributes'>
+                                                                                    <div class='author-list'>
+                                                    <span class='author label white-text'>Ankush</span>
+                                            </div>
+                                    </div>
+                                    <div class='test-steps'>
+                                        <table class='bordered table-results'>
+                                            <thead>
+                                                <tr>
+                                                    <th>Status</th>
+                                                    <th>Timestamp</th>
+                                                    <th>Details</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr class='log' status='pass'>
+                                                        <td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+                                                        <td class='timestamp'>7/8/2018 3:28:03 PM</td>
+                                                        <td class='step-details'>Given I am on Google Search page-Successfully Opened URL</td>
+                                                    </tr>
+                                                    <tr class='log' status='pass'>
+                                                        <td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+                                                        <td class='timestamp'>7/8/2018 3:28:04 PM</td>
+                                                        <td class='step-details'>Given I enter search Aviva-Successfully Entered Search Keyword As Aviva</td>
+                                                    </tr>
+                                                    <tr class='log' status='pass'>
+                                                        <td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+                                                        <td class='timestamp'>7/8/2018 3:28:09 PM</td>
+                                                        <td class='step-details'>When I click on Search Button-Successfully Clicked On Search Button</td>
+                                                    </tr>
+                                                    <tr class='log' status='fail'>
+                                                        <td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+                                                        <td class='timestamp'>7/8/2018 3:28:09 PM</td>
+                                                        <td class='step-details'>Then Search result should contain 20 with Aviva-Expected Links: 20 Actual Links: 16 Are Not Equal.NUnit.Framework.AssertionException:   Expected: 20
+  But was:  16
+
+   at NUnit.Framework.Assert.ReportFailure(String message) in C:\src\nunit\nunit\src\NUnitFramework\framework\Assert.cs:line 408
+   at NUnit.Framework.Assert.ReportFailure(ConstraintResult result, String message, Object[] args) in C:\src\nunit\nunit\src\NUnitFramework\framework\Assert.cs:line 396
+   at NUnit.Framework.Assert.That[TActual](TActual actual, IResolveConstraint expression, String message, Object[] args) in C:\src\nunit\nunit\src\NUnitFramework\framework\Assert.That.cs:line 247
+   at NUnit.Framework.Assert.AreEqual(Object expected, Object actual) in C:\src\nunit\nunit\src\NUnitFramework\framework\Assert.Equality.cs:line 128
+   at Aviva.AvivaAssignmentPage.verifyNoOfLinksForText(Int32 links, String keyword) in C:\Users\Ankush\source\repos\Aviva\Aviva\PageObjects\AvivaAssignmentPage.cs:line 59
+   at Aviva.AvivaAssignmentSteps.ThenSearchResultShouldContainWith(Int32 links, String keyword) in C:\Users\Ankush\source\repos\Aviva\Aviva\StepDefinations\AvivaAssignmentSteps.cs:line 101</td>
+                                                    </tr>
+                                                    <tr class='log' status='pass'>
+                                                        <td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+                                                        <td class='timestamp'>7/8/2018 3:28:17 PM</td>
+                                                        <td class='step-details'>When I click on specfied 1 with Aviva-Successfully clicked on link with no 1</td>
+                                                    </tr>
+                                                    <tr class='log' status='pass'>
+                                                        <td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+                                                        <td class='timestamp'>7/8/2018 3:28:17 PM</td>
+                                                        <td class='step-details'>Then I should see page with Aviva Life Insurance Co Ltd-Expected and Actual titles are matching. Expected Title :Aviva Life Insurance Co Ltd</td>
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                <ul class='screenshots'>
+                                        <li><img data-featherlight='C:\Users\Ankush\source\repos\Aviva\Aviva/Screenshots/ErrorShot7_8_2018_3_28_10_PM.png' class='step-img' src='C:\Users\Ankush\source\repos\Aviva\Aviva/Screenshots/ErrorShot7_8_2018_3_28_10_PM.png' data-src='C:\Users\Ankush\source\repos\Aviva\Aviva/Screenshots/ErrorShot7_8_2018_3_28_10_PM.png'></li>
+                                </ul>
+                        </div>
+                    </li>
+                    <li class='test displayed active  pass' status='pass' test-id='2'>
+                        <div class='test-heading'>
+                            <span class='test-name'>Scenario: Verify No of links appearing on Google page with right search</span>
+                            <span class='test-time'>7/8/2018 3:28:34 PM</span>
+                            <span class='test-status right pass'>Pass</span>
+                        </div>
+                        <div class='test-content hide'>
+                                <div class='test-time-info'>
+                                    <span class='label start-time'>7/8/2018 3:28:34 PM</span>
+                                    <span class='label end-time'>7/8/2018 3:28:51 PM</span>
+                                    <span class='label time-taken grey lighten-1 white-text'>00:00:16.0961098</span>
+                                </div>
+                                    <div class='test-attributes'>
+                                                                                    <div class='author-list'>
+                                                    <span class='author label white-text'>Ankush</span>
+                                            </div>
+                                    </div>
+                                    <div class='test-steps'>
+                                        <table class='bordered table-results'>
+                                            <thead>
+                                                <tr>
+                                                    <th>Status</th>
+                                                    <th>Timestamp</th>
+                                                    <th>Details</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr class='log' status='pass'>
+                                                        <td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+                                                        <td class='timestamp'>7/8/2018 3:28:37 PM</td>
+                                                        <td class='step-details'>Given I am on Google Search page-Successfully Opened URL</td>
+                                                    </tr>
+                                                    <tr class='log' status='pass'>
+                                                        <td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+                                                        <td class='timestamp'>7/8/2018 3:28:39 PM</td>
+                                                        <td class='step-details'>Given I enter search Capgemini-Successfully Entered Search Keyword As Capgemini</td>
+                                                    </tr>
+                                                    <tr class='log' status='pass'>
+                                                        <td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+                                                        <td class='timestamp'>7/8/2018 3:28:43 PM</td>
+                                                        <td class='step-details'>When I click on Search Button-Successfully Clicked On Search Button</td>
+                                                    </tr>
+                                                    <tr class='log' status='pass'>
+                                                        <td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+                                                        <td class='timestamp'>7/8/2018 3:28:43 PM</td>
+                                                        <td class='step-details'>Then Search result should contain 14 with Capgemini-Expected Links: 14 Actual Links: 14 Are Equal.</td>
+                                                    </tr>
+                                                    <tr class='log' status='pass'>
+                                                        <td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+                                                        <td class='timestamp'>7/8/2018 3:28:50 PM</td>
+                                                        <td class='step-details'>When I click on specfied 1 with Capgemini-Successfully clicked on link with no 1</td>
+                                                    </tr>
+                                                    <tr class='log' status='pass'>
+                                                        <td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+                                                        <td class='timestamp'>7/8/2018 3:28:51 PM</td>
+                                                        <td class='step-details'>Then I should see page with Capgemini: Consulting, Technology, Digital Transformation Services-Expected and Actual titles are matching. Expected Title :Capgemini: Consulting, Technology, Digital Transformation Services</td>
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                        </div>
+                    </li>
+                    <li class='test displayed active  fail' status='fail' test-id='3'>
+                        <div class='test-heading'>
+                            <span class='test-name'>Scenario: Verify No of links appearing on Google page with wrong search</span>
+                            <span class='test-time'>7/8/2018 3:28:51 PM</span>
+                            <span class='test-status right fail'>Fail</span>
+                        </div>
+                        <div class='test-content hide'>
+                                <div class='test-time-info'>
+                                    <span class='label start-time'>7/8/2018 3:28:51 PM</span>
+                                    <span class='label end-time'>7/8/2018 3:29:19 PM</span>
+                                    <span class='label time-taken grey lighten-1 white-text'>00:00:28.5699103</span>
+                                </div>
+                                    <div class='test-attributes'>
+                                                                                    <div class='author-list'>
+                                                    <span class='author label white-text'>Ankush</span>
+                                            </div>
+                                    </div>
+                                    <div class='test-steps'>
+                                        <table class='bordered table-results'>
+                                            <thead>
+                                                <tr>
+                                                    <th>Status</th>
+                                                    <th>Timestamp</th>
+                                                    <th>Details</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr class='log' status='pass'>
+                                                        <td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+                                                        <td class='timestamp'>7/8/2018 3:28:54 PM</td>
+                                                        <td class='step-details'>Given I am on Google Search page-Successfully Opened URL</td>
+                                                    </tr>
+                                                    <tr class='log' status='pass'>
+                                                        <td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+                                                        <td class='timestamp'>7/8/2018 3:28:55 PM</td>
+                                                        <td class='step-details'>Given I enter search Aviva-Successfully Entered Search Keyword As Aviva</td>
+                                                    </tr>
+                                                    <tr class='log' status='pass'>
+                                                        <td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+                                                        <td class='timestamp'>7/8/2018 3:29:02 PM</td>
+                                                        <td class='step-details'>Given I click on I'm Feeling Lucky Button instead-Successfully Clicked On I'am Feeling Lucky Button</td>
+                                                    </tr>
+                                                    <tr class='log' status='pass'>
+                                                        <td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+                                                        <td class='timestamp'>7/8/2018 3:29:02 PM</td>
+                                                        <td class='step-details'>Then I should not see search result containing 20 with Aviva-Expected Links: 20 Actual Links: 128 Are Not Equal as Expected</td>
+                                                    </tr>
+                                                    <tr class='log' status='fail'>
+                                                        <td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+                                                        <td class='timestamp'>7/8/2018 3:29:02 PM</td>
+                                                        <td class='step-details'>Then I should not be able to click on 1 with Aviva-Able to click on link with no 1Not Expected NUnit.Framework.AssertionException:   Expected: 0
+  But was:  128
+
+   at NUnit.Framework.Assert.ReportFailure(String message) in C:\src\nunit\nunit\src\NUnitFramework\framework\Assert.cs:line 408
+   at NUnit.Framework.Assert.ReportFailure(ConstraintResult result, String message, Object[] args) in C:\src\nunit\nunit\src\NUnitFramework\framework\Assert.cs:line 396
+   at NUnit.Framework.Assert.That[TActual](TActual actual, IResolveConstraint expression, String message, Object[] args) in C:\src\nunit\nunit\src\NUnitFramework\framework\Assert.That.cs:line 247
+   at NUnit.Framework.Assert.AreEqual(Object expected, Object actual) in C:\src\nunit\nunit\src\NUnitFramework\framework\Assert.Equality.cs:line 128
+   at Aviva.AvivaAssignmentPage.verifyLinkNotPresent(Int32 linkNo, String keyword) in C:\Users\Ankush\source\repos\Aviva\Aviva\PageObjects\AvivaAssignmentPage.cs:line 96
+   at Aviva.AvivaAssignmentSteps.ThenIShouldNotBeAbleToClickOnWithAviva(Int32 linkNo, String keyword) in C:\Users\Ankush\source\repos\Aviva\Aviva\StepDefinations\AvivaAssignmentSteps.cs:line 190</td>
+                                                    </tr>
+                                                    <tr class='log' status='fail'>
+                                                        <td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+                                                        <td class='timestamp'>7/8/2018 3:29:19 PM</td>
+                                                        <td class='step-details'>Then I should see page with Aviva Life Insurance Co Ltd-Expected and Actual titles are not matching.OpenQA.Selenium.WebDriverTimeoutException: Timed out after 15 seconds
+   at OpenQA.Selenium.Support.UI.DefaultWait`1.ThrowTimeoutException(String exceptionMessage, Exception lastException)
+   at OpenQA.Selenium.Support.UI.DefaultWait`1.Until[TResult](Func`2 condition)
+   at Aviva.AvivaAssignmentPage.verifyPageTitle(String expectedTitle) in C:\Users\Ankush\source\repos\Aviva\Aviva\PageObjects\AvivaAssignmentPage.cs:line 72
+   at Aviva.AvivaAssignmentSteps.ThenIShouldSeePageIWith(String title) in C:\Users\Ankush\source\repos\Aviva\Aviva\StepDefinations\AvivaAssignmentSteps.cs:line 136</td>
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                <ul class='screenshots'>
+                                        <li><img data-featherlight='C:\Users\Ankush\source\repos\Aviva\Aviva/Screenshots/ErrorShot7_8_2018_3_29_03_PM.png' class='step-img' src='C:\Users\Ankush\source\repos\Aviva\Aviva/Screenshots/ErrorShot7_8_2018_3_29_03_PM.png' data-src='C:\Users\Ankush\source\repos\Aviva\Aviva/Screenshots/ErrorShot7_8_2018_3_29_03_PM.png'></li>
+                                        <li><img data-featherlight='C:\Users\Ankush\source\repos\Aviva\Aviva/Screenshots/ErrorShot7_8_2018_3_29_20_PM.png' class='step-img' src='C:\Users\Ankush\source\repos\Aviva\Aviva/Screenshots/ErrorShot7_8_2018_3_29_20_PM.png' data-src='C:\Users\Ankush\source\repos\Aviva\Aviva/Screenshots/ErrorShot7_8_2018_3_29_20_PM.png'></li>
+                                </ul>
+                        </div>
+                    </li>
+                    <li class='test displayed active  fail' status='fail' test-id='4'>
+                        <div class='test-heading'>
+                            <span class='test-name'>Scenario: Verify No of links appearing on Google page with wrong search</span>
+                            <span class='test-time'>7/8/2018 3:29:21 PM</span>
+                            <span class='test-status right fail'>Fail</span>
+                        </div>
+                        <div class='test-content hide'>
+                                <div class='test-time-info'>
+                                    <span class='label start-time'>7/8/2018 3:29:21 PM</span>
+                                    <span class='label end-time'>7/8/2018 3:29:38 PM</span>
+                                    <span class='label time-taken grey lighten-1 white-text'>00:00:17.5050726</span>
+                                </div>
+                                    <div class='test-attributes'>
+                                                                                    <div class='author-list'>
+                                                    <span class='author label white-text'>Ankush</span>
+                                            </div>
+                                    </div>
+                                    <div class='test-steps'>
+                                        <table class='bordered table-results'>
+                                            <thead>
+                                                <tr>
+                                                    <th>Status</th>
+                                                    <th>Timestamp</th>
+                                                    <th>Details</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr class='log' status='pass'>
+                                                        <td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+                                                        <td class='timestamp'>7/8/2018 3:29:27 PM</td>
+                                                        <td class='step-details'>Given I am on Google Search page-Successfully Opened URL</td>
+                                                    </tr>
+                                                    <tr class='log' status='pass'>
+                                                        <td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+                                                        <td class='timestamp'>7/8/2018 3:29:27 PM</td>
+                                                        <td class='step-details'>Given I enter search Capgemini-Successfully Entered Search Keyword As Capgemini</td>
+                                                    </tr>
+                                                    <tr class='log' status='pass'>
+                                                        <td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+                                                        <td class='timestamp'>7/8/2018 3:29:37 PM</td>
+                                                        <td class='step-details'>Given I click on I'm Feeling Lucky Button instead-Successfully Clicked On I'am Feeling Lucky Button</td>
+                                                    </tr>
+                                                    <tr class='log' status='pass'>
+                                                        <td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+                                                        <td class='timestamp'>7/8/2018 3:29:37 PM</td>
+                                                        <td class='step-details'>Then I should not see search result containing 14 with Capgemini-Expected Links: 14 Actual Links: 4 Are Not Equal as Expected</td>
+                                                    </tr>
+                                                    <tr class='log' status='fail'>
+                                                        <td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+                                                        <td class='timestamp'>7/8/2018 3:29:37 PM</td>
+                                                        <td class='step-details'>Then I should not be able to click on 1 with Capgemini-Able to click on link with no 1Not Expected NUnit.Framework.AssertionException:   Expected: 0
+  But was:  4
+
+   at NUnit.Framework.Assert.ReportFailure(String message) in C:\src\nunit\nunit\src\NUnitFramework\framework\Assert.cs:line 408
+   at NUnit.Framework.Assert.ReportFailure(ConstraintResult result, String message, Object[] args) in C:\src\nunit\nunit\src\NUnitFramework\framework\Assert.cs:line 396
+   at NUnit.Framework.Assert.That[TActual](TActual actual, IResolveConstraint expression, String message, Object[] args) in C:\src\nunit\nunit\src\NUnitFramework\framework\Assert.That.cs:line 247
+   at NUnit.Framework.Assert.AreEqual(Object expected, Object actual) in C:\src\nunit\nunit\src\NUnitFramework\framework\Assert.Equality.cs:line 128
+   at Aviva.AvivaAssignmentPage.verifyLinkNotPresent(Int32 linkNo, String keyword) in C:\Users\Ankush\source\repos\Aviva\Aviva\PageObjects\AvivaAssignmentPage.cs:line 96
+   at Aviva.AvivaAssignmentSteps.ThenIShouldNotBeAbleToClickOnWithAviva(Int32 linkNo, String keyword) in C:\Users\Ankush\source\repos\Aviva\Aviva\StepDefinations\AvivaAssignmentSteps.cs:line 190</td>
+                                                    </tr>
+                                                    <tr class='log' status='pass'>
+                                                        <td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+                                                        <td class='timestamp'>7/8/2018 3:29:38 PM</td>
+                                                        <td class='step-details'>Then I should see page with Capgemini: Consulting, Technology, Digital Transformation Services-Expected and Actual titles are matching. Expected Title :Capgemini: Consulting, Technology, Digital Transformation Services</td>
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                <ul class='screenshots'>
+                                        <li><img data-featherlight='C:\Users\Ankush\source\repos\Aviva\Aviva/Screenshots/ErrorShot7_8_2018_3_29_38_PM.png' class='step-img' src='C:\Users\Ankush\source\repos\Aviva\Aviva/Screenshots/ErrorShot7_8_2018_3_29_38_PM.png' data-src='C:\Users\Ankush\source\repos\Aviva\Aviva/Screenshots/ErrorShot7_8_2018_3_29_38_PM.png'></li>
+                                </ul>
+                        </div>
+                    </li>
+            </ul>
+        </div>
+    </div>
+    <!-- subview left -->
+
+    <div class='subview-right left'>
+        <div class='view-summary'>
+            <h5 class='test-name'></h5>
+
+            <div id='step-filters' class="right">
+                <span class="blue-text" status="info" alt="info" title="info"><i class="material-icons">info_outline</i></span>
+                <span class="green-text" status="pass" alt="pass" title="pass"><i class="material-icons">check_circle</i></span>
+                <span class="red-text" status="fail" alt="fail" title="fail"><i class="material-icons">cancel</i></span>
+                <span class="red-text text-darken-4" status="fatal" alt="fatal" title="fatal"><i class="material-icons">cancel</i></span>
+                <span class="pink-text text-lighten-1" status="error" alt="error" title="error"><i class="material-icons">error</i></span>
+                <span class="orange-text" alt="warning" status="warning" title="warning"><i class="material-icons">warning</i></span>
+                <span class="teal-text" status="skip" alt="skip" title="skip"><i class="material-icons">redo</i></span>
+                <span status="clear" alt="Clear filters" title="Clear filters"><i class="material-icons">clear</i></span>
+            </div>
+        </div>
+    </div>
+    <!-- subview right -->
+
+</div>
+<!-- test view -->
+            <!-- category view -->
+            
+
+
+    <div id='exception-view' class='view hide'>
+
+        <section id='controls'>
+            <div class='controls grey lighten-4'>
+                <!-- search -->
+                <div class='chip transparent' alt='Search Tests' title='Search Tests'>
+                    <a href="#" class='search-div'>
+                        <i class='material-icons'>search</i> Search
+                    </a>
+
+                    <div class='input-field left hide'>
+                        <input id='search-tests' type='text' class='validate browser-default' placeholder='Search Tests...'>
+                    </div>
+                </div>
+                <!-- search -->
+            </div>
+        </section>
+
+        <div class='subview-left left'>
+
+            <div class='view-summary'>
+                <h5>Exceptions</h5>
+                <ul id='exception-collection' class='exception-collection'>
+
+                </ul>
+            </div>
+        </div>
+
+        <div class='subview-right left'>
+            <div class='view-summary'>
+                <h5 class='exception-name'></h5>
+            </div>
+        </div>
+    </div>
+<!-- exception view -->
+            
+
+
+<div id='dashboard-view' class='view hide'>
+    <div class='card-panel transparent np-v'>
+        <h5>Dashboard</h5>
+
+        <div class='row'>
+            <div class='col s2'>
+                <div class='card-panel r'>
+ <span>Tests</span>                     <div class='panel-lead'>4</div>
+                </div>
+            </div>
+            <div class='col s2'>
+                <div class='card-panel r'>
+ <span>Steps</span>                     <div class='panel-lead'>24</div>
+                </div>
+            </div>
+            <div class='col s2'>
+                <div class='card-panel r'>
+                    Start
+                    <div class='panel-lead'>7/8/2018 3:27:28 PM</div>
+                </div>
+            </div>
+            <div class='col s2'>
+                <div class='card-panel r'>
+                    End
+                    <div class='panel-lead'>7/8/2018 3:29:38 PM</div>
+                </div>
+            </div>
+            <div class='col s2'>
+                <div class='card-panel r'>
+                    Time Taken
+                    <div class='panel-lead'>00:02:10.4624960</div>
+                </div>
+            </div>
+
+                <div class='col s4'>
+                    <div class='card-panel'>
+                        <span class='right label cyan white-text'>Environment</span><p>&nbsp;</p>
+
+                        <table>
+                            <tr>
+                                <th>Name</th>
+                                <th>Value</th>
+                            </tr>
+                                <tr>
+                                    <td>OS</td>
+                                    <td>Microsoft Windows NT 10.0.17134.0</td>
+                                </tr>
+                                <tr>
+                                    <td>Host Name</td>
+                                    <td>LAPTOP-48E3BAK7</td>
+                                </tr>
+                                <tr>
+                                    <td>Environment</td>
+                                    <td>NA</td>
+                                </tr>
+                                <tr>
+                                    <td>Username</td>
+                                    <td>Ankush</td>
+                                </tr>
+                        </table>
+                    </div>
+                </div>
+
+        </div>
+    </div>
+</div>
+<!-- dashboard view -->
+            
+
+
+<!-- exception view -->
+
+		</div>
+		<!-- container -->
+
+		<script>
+			var statusGroup = {
+			    passParent: 1,
+			    failParent: 3,
+			    fatalParent: 0,
+			    errorParent: 0,
+			    warningParent: 0,
+			    skipParent: 0,
+				
+			    passChild: 20,
+			    failChild: 4,
+			    fatalChild: 0,
+			    errorChild: 0,
+			    warningChild: 0,
+			    skipChild: 0,
+			    infoChild: 0,
+				
+			    passGrandChild: 0,
+			    failGrandChild: 0,
+			    fatalGrandChild: 0,
+			    errorGrandChild: 0,
+			    warningGrandChild: 0,
+			    skipGrandChild: 0,
+			    infoGrandChild: 0
+			};
+		</script>
+
+		<script src='https://cdn.rawgit.com/anshooarora/extentreports-csharp/e468054d67d93c2fd9c8f0f60e31a7ea09fa3bf6/dist/js/extent.js' type='text/javascript'></script>
+		
+		
+		            <script type='text/javascript'>
+			    
+                $(document).ready(function() {
+                    
+                });
+            
+            </script>
+	</body>
+	
+</html>
